@@ -21,24 +21,6 @@ const greetByName = (name, expectedName = 'John') => {
 }
 
 
-submitText.addEventListener('click', () => {
-    const name = inputName.value.trim();
-    const nameGreeting = greetByName(name);
-    outputText.textContent = `${nameGreeting}`;
-} )
-submitNumber.addEventListener('click', () => {
-    const number = parseInt(inputNumber.value);
-    const numberGreeting = greetByNumber(number);
-
-    outputNumber.textContent = `${numberGreeting}`;
-} )
-
-submitArray.addEventListener('click', () => {
-    const multiples = hasMultipleOfThree();
-    outputArray.textContent = `${multiples.join(', ')}`;
-});
-
-
 
 const numArray = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
@@ -46,7 +28,12 @@ const hasMultipleOfThree = (array = numArray) => {
     return array.filter(num => num % 3 === 0)
 }
 
-const isBracketSequenceTrue = (bracket) => {
+const isClosedBracket = (char) => {
+    return [')', '}', ']'].indexOf(char) > -1
+}
+
+
+const isBracketSequenceValid = (bracket) => {
     let stack = []
     let brackets = {
         ')': '(',
@@ -67,10 +54,6 @@ const isBracketSequenceTrue = (bracket) => {
 }
 
 
-const isClosedBracket = (char) => {
-    return [')', '}', ']'].indexOf(char) > -1
-}
-
 
 
 const bracketStack = '[((())()(())]]'
@@ -79,9 +62,23 @@ const bracketStack1 = '[({})](){}'
 const bracketStack2 = '()'
 
 
-console.log(isBracketSequenceTrue(bracketStack))
-console.log(isBracketSequenceTrue(bracketStack1))
-console.log(isBracketSequenceTrue(bracketStack2))
+console.log(isBracketSequenceValid(bracketStack))
+console.log(isBracketSequenceValid(bracketStack1))
+console.log(isBracketSequenceValid(bracketStack2))
 
 
+submitText.addEventListener('click', () => {
+    const name = inputName.value.trim();
+    const nameGreeting = greetByName(name);
+    outputText.textContent = `${nameGreeting}`;
+} )
+submitNumber.addEventListener('click', () => {
+    const number = parseInt(inputNumber.value);
+    const numberGreeting = greetByNumber(number);
+    outputNumber.textContent = `${numberGreeting}`;
+} )
 
+submitArray.addEventListener('click', () => {
+    const multiples = hasMultipleOfThree();
+    outputArray.textContent = `${multiples.join(', ')}`;
+});
